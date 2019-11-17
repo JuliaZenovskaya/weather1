@@ -112,7 +112,3 @@ export function displayError(message) {
     WEATHER.innerHTML = "";
     ERROR.innerHTML = errorHtml;
 }
-
-export function updateTab(newTitle) {
-    document.title = newTitle;
-}
