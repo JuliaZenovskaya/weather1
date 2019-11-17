@@ -1,13 +1,11 @@
 import { extractForecast, extractErrorMessage, getWeather, displayWeather, displayErrorMessage } from './work.js';
 
-
 window.onload = () => {
     const input = document.getElementById("input-form");
     input.addEventListener("submit", onSubmit);
 };
 
 function onSubmit(e) {
-
     e.preventDefault();
     const city = e.currentTarget.elements.inputfield.value;
     getWeather(city)

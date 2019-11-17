@@ -3,10 +3,9 @@ const { extractForecast, extractErrorMessage, getWeather } = require('../scripts
 
 describe('Correct request status', () => {
   it('request with correct city', () => {
-    const city = "Moscow";
+    const city = "Mosow";
     getWeather(city)
         .then(response => {
-          try {
             expect(response.ok).to.be.true;
           } catch (error) {
             console.log("First test 'request with correct city' crashed: ");
@@ -90,7 +89,6 @@ describe('Getting data from response', () => {
 
             ],
     };
-
     const real = extractForecast(response);
     expect(real).to.eql(exp);
   });

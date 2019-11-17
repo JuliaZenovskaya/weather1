@@ -68,7 +68,6 @@ export function extractForecast(json) {
 
             ],
     };
-
     return forecast;
 }
 
@@ -76,14 +75,12 @@ export function extractErrorMessage(error) {
   let message = {
     message: error,
   }
-
   return message;
 }
 
 export function displayWeather(forecast) {
     let source = document.getElementById("weather-template").innerHTML;
     let template = Handlebars.compile(source);
-
     let html = template(forecast);
     document.getElementById("weather-container").innerHTML = html;
 }
@@ -92,11 +89,6 @@ export function displayWeather(forecast) {
 export function displayErrorMessage(message) {
   let source = document.getElementById("message-template").innerHTML;
   let template = Handlebars.compile(source);
-
   let html = template(message);
   document.getElementById("message-container").innerHTML = html;
 }
-
-//exports.extractForecast = extractForecast;
-//exports.extractErrorMessage = extractErrorMessage;
-//exports.getWeather = getWeather;
