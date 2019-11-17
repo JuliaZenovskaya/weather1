@@ -1,0 +1,42 @@
+{
+  "name": "weatherlab1",
+  "version": "1.0.0",
+  "description": "\"# weather1\"",
+  "main": "script.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "webpack --mode=production",
+    "start": "webpack-dev-server --mode=development"
+  },
+  "dependencies": {
+    "@babel/register": "^7.7.0",
+    "export": "^0.1.337",
+    "handlebars": "^4.5.2",
+    "handlebars-loader": "^1.7.1",
+    "import": "^0.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliaZenovskaya/weather1.git"
+  },
+  "author": "Jully",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuliaZenovskaya/weather1/issues"
+  },
+  "homepage": "https://github.com/JuliaZenovskaya/weather1#readme"
+}

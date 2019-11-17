@@ -1,5 +1,4 @@
-import weatherParam from "handlebars-loader!../model/weather-parametrs.hbs";
-import errorParam from "handlebars-loader!../model/erroe-parametrs.hbs";
+
 
 const WEATHER = document.getElementById("weather-container");
 const ERROR = document.getElementById("error-container");
@@ -11,8 +10,7 @@ window.onload = () => {
 
 function onSubmit(e) {
     e.preventDefault();
-
-    const city = e.currentTarget.elements.input.value;
+    const city = e.currentTarget.elements.inputfield.value;
     getWeather(city)
         .then(response => {
             response.json()
@@ -20,27 +18,26 @@ function onSubmit(e) {
                 if (response.ok) {
                     const forecast = extractForecast(json);
                     displayWeather(forecast);
+                    displayErrorMessage(null);
                 } else {
-                    displayError(json.message);
+                    const error = extractErrorMessage(json.message);
+                    displayErrorMessage(error);
+                    displayWeather(null);
                 }
             });
         },
-        error => displayError(error));
+        error => displayErrorMessage(error));
 }
 
-export function getWeather(city) {
+function getWeather(city) {
     const url = "https://api.openweathermap.org/data/2.5/weather?q="
         + city +
         "&appid=e972dcd233bab1ebce419c370711921f&units=metric&lang=en";
     return fetch(url);
 }
 
-export function extractForecast(json) {
+function extractForecast(json) {
     const {
-        description:
-        {
-          main: description;
-        }
         name: city,
         main:
         {
@@ -61,8 +58,8 @@ export function extractForecast(json) {
 
     let forecast =
     {
-        city: city,
-        description: description,
+        city: "Weather in " + city,
+        description: " is " + json.weather[0].description,
         parameters:
             [
                 {
@@ -101,14 +98,27 @@ export function extractForecast(json) {
     return forecast;
 }
 
-export function displayWeather(weather) {
-    const weatherHtml = weatherParam(weather);
-    WEATHER.innerHTML = weatherHtml;
-    ERROR.innerHTML = "";
+function extractErrorMessage(error) {
+  let message = {
+    message: error,
+  }
+
+  return message;
 }
 
-export function displayError(message) {
-    const errorHtml = errorParam({ message });
-    WEATHER.innerHTML = "";
-    ERROR.innerHTML = errorHtml;
+function displayWeather(forecast) {
+    let source = document.getElementById("weather-template").innerHTML;
+    let template = Handlebars.compile(source);
+
+    let html = template(forecast);
+    document.getElementById("weather-container").innerHTML = html;
+}
+
+
+function displayErrorMessage(message) {
+  let source = document.getElementById("message-template").innerHTML;
+  let template = Handlebars.compile(source);
+
+  let html = template(message);
+  document.getElementById("message-container").innerHTML = html;
 }

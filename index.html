@@ -8,13 +8,28 @@
   <body>
     <div id="input-panel">
       <form id = "input-form">
-        <input id="input-field" type="text" placeholder="City name">
+        <input id="inputfield" type="text" placeholder="City name">
         <input type="submit" id="input-button" Value="Search">
       </form>
     </div>
 
     <div id="weather-container"></div>
     <div id="message-container"></div>
+
+    <script id="weather-template" type="text/x-handlebars-template">
+           <h1>{{city}}{{description}}</h1>
+           <div id="weather-parameters">
+           {{#each parameters}}
+               <div id="parameter">
+                   <div class="parameter-type">{{name}}: {{value}} {{{units}}}</div>
+               </div>
+           {{/each}}
+           </div>
+       </script>
+
+       <script id="message-template" type="text/x-handlebars-template">
+         <h1>{{message}}</h1>
+       </script>
 
     <script type="text/javascript" src="script.js"></script>
   </body>
