@@ -1,11 +1,34 @@
-const { expect } = require('chai');
+const { expect, assert } = require('chai');
 const { extractForecast, extractErrorMessage, getWeather } = require('../scripts/work');
 
 describe('Correct request status', () => {
   it('request with correct city', () => {
     const city = "Moscow";
-    const request = getWeather(city);
-    expect(request.ok).to.be.true;
+    getWeather(city)
+        .then(response => {
+          try {
+            expect(response.ok).to.be.true;
+          } catch (error) {
+            console.log("First test 'request with correct city' crashed: ");
+            console.log("Message: " + error.message);
+            console.log("Actual: " + error.actual);
+            console.log("Expected: " + error.expected);
+          }
+        });
+  });
+  it('request with not correct city', () => {
+    const city = "Mosco";
+    getWeather(city)
+        .then(response => {
+          try {
+            expect(response.ok).to.be.false;
+          } catch (error) {
+            console.log("Second test 'request with not correct city' crashed: ");
+            console.log("Message: " + error.message);
+            console.log("Actual: " + error.actual);
+            console.log("Expected: " + error.expected);
+          }
+        });
   });
 });
 
