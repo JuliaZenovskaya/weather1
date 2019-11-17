@@ -16,11 +16,12 @@
     "handlebars-loader": "^1.7.1"
   },
   "devDependencies": {
-    "@babel/register": "^7.6.2",
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
+    "@babel/register": "^7.6.2",
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
+    "node-fetch": "^2.6.0",
     "sinon": "^7.5.0"
   },
   "repository": {

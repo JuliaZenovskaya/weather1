@@ -1,10 +1,15 @@
 const { expect } = require('chai');
 const { extractForecast, extractErrorMessage, getWeather } = require('../scripts/work');
 
-
+describe('Correct request status', () => {
+  it('request with correct city', () => {
+    const city = "Moscow";
+    const request = getWeather(city);
+    expect(request.ok).to.be.true;
+  });
+});
 
 describe('Getting data from response', () => {
-
   const response = {
     "coord":{"lon":37.62,"lat":55.75},
     "weather":[{"id":701,"main":"Mist","description":"mist","icon":"50n"}],
