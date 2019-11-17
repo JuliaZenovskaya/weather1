@@ -7,23 +7,16 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test"
+    "test": "./node_modules/.bin/mocha ./test --require @babel/register"
   },
   "dependencies": {
-    "@babel/register": "^7.7.0",
-    "export": "^0.1.337",
     "handlebars": "^4.5.2",
-    "handlebars-loader": "^1.7.1",
-    "import": "^0.0.6",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "handlebars-loader": "^1.7.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/node": "^7.7.0",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.6.2",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
     "sinon": "^7.5.0"
