@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { extractForecast, extractErrorMessage, getWeather } = require('../work');
+const { extractForecast, extractErrorMessage, getWeather } = require('../scripts/work');
 
 
 
