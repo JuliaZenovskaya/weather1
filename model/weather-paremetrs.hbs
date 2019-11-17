@@ -1,0 +1,9 @@
+<h1>Weather in {{city}} is {{main}}</h1>
+<div class="weather-parameters">
+{{#each parameters}}
+    <div class="parameter">
+        <div class="parameter-name">{{name}}</div>
+        <div class="parameter-value">{{value}} {{{units}}}</div>
+    </div>
+{{/each}}
+</div>
