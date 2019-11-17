@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" type="text/css" href="styles\style.css">
+    <script type="text/javascript" src="handlebars.min.js"></script>
+  </head>
+  <body>
+    <div id="input-panel">
+      <form onsubmit="OnSubmitListener(); return false;">
+        <input id="input-field" type="text" placeholder="City name">
+        <input type="submit" id="input-button" Value="Search">
+      </form>
+    </div>
+
+    <div id="weather-container"></div>
+    <div id="message-container"></div>
+
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
