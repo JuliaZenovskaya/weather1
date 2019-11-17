@@ -1,3 +1,6 @@
+import weatherTemplate from "handlebars-loader!../model/weather-parametrs.hbs";
+import errorTemplate from "handlebars-loader!../model/erroe-parametrs.hbs";
+
 const WEATHER = document.getElementById("weather-container");
 const ERROR = document.getElementById("error-container");
 
