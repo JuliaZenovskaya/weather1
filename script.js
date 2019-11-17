@@ -1,5 +1,5 @@
-import weatherTemplate from "handlebars-loader!../model/weather-parametrs.hbs";
-import errorTemplate from "handlebars-loader!../model/erroe-parametrs.hbs";
+import weatherParam from "handlebars-loader!../model/weather-parametrs.hbs";
+import errorParam from "handlebars-loader!../model/erroe-parametrs.hbs";
 
 const WEATHER = document.getElementById("weather-container");
 const ERROR = document.getElementById("error-container");
@@ -20,10 +20,6 @@ function onSubmit(e) {
                 if (response.ok) {
                     const forecast = extractForecast(json);
                     displayWeather(forecast);
-
-                    const cityName = json.name;
-                    const imgHref = "https://openweathermap.org/img/wn/" + json.weather[0].icon + ".png";
-                    updateTab("Weather in " + cityName, imgHref);
                 } else {
                     displayError(json.message);
                 }
@@ -41,6 +37,10 @@ export function getWeather(city) {
 
 export function extractForecast(json) {
     const {
+        description:
+        {
+          main: description;
+        }
         name: city,
         main:
         {
@@ -62,7 +62,7 @@ export function extractForecast(json) {
     let forecast =
     {
         city: city,
-        description: json.weather[0].description,
+        description: description,
         parameters:
             [
                 {
@@ -102,13 +102,13 @@ export function extractForecast(json) {
 }
 
 export function displayWeather(weather) {
-    const weatherHtml = weatherTemplate(weather);
+    const weatherHtml = weatherParam(weather);
     WEATHER.innerHTML = weatherHtml;
     ERROR.innerHTML = "";
 }
 
 export function displayError(message) {
-    const errorHtml = errorTemplate({ message });
+    const errorHtml = errorParam({ message });
     WEATHER.innerHTML = "";
     ERROR.innerHTML = errorHtml;
 }
