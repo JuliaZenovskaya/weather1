@@ -72,7 +72,7 @@ describe('Getting data from response', () => {
     expect(real).to.eql(exp);
   });
 
-  it("6 elements from response with existing city", function() {
+/*  it("6 elements from response with existing city", function() {
     const elements = 6;
     const forecast = extractForecast(response);
     let len = 0;
@@ -89,7 +89,7 @@ describe('Getting data from response', () => {
       expect(parameter).to.be.an('object').that.have.property("value");
       expect(parameter).to.be.an('object').that.have.property("units");
     });
-  });
+  });*/
 });
 
 describe('Correct request status', () => {
