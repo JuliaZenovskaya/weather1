@@ -1,36 +1,6 @@
 const { expect, assert } = require('chai');
 const { extractForecast, extractErrorMessage, getWeather } = require('../scripts/work');
 
-describe('Correct request status', () => {
-  it('request with correct city', () => {
-    const city = "Mosow";
-    getWeather(city)
-        .then(response => {
-            expect(response.ok).to.be.true;
-          } catch (error) {
-            console.log("First test 'request with correct city' crashed: ");
-            console.log("Message: " + error.message);
-            console.log("Actual: " + error.actual);
-            console.log("Expected: " + error.expected);
-          }
-        });
-  });
-  it('request with not correct city', () => {
-    const city = "Mosco";
-    getWeather(city)
-        .then(response => {
-          try {
-            expect(response.ok).to.be.false;
-          } catch (error) {
-            console.log("Second test 'request with not correct city' crashed: ");
-            console.log("Message: " + error.message);
-            console.log("Actual: " + error.actual);
-            console.log("Expected: " + error.expected);
-          }
-        });
-  });
-});
-
 describe('Getting data from response', () => {
   const response = {
     "coord":{"lon":37.62,"lat":55.75},
@@ -119,5 +89,36 @@ describe('Getting data from response', () => {
       expect(parameter).to.be.an('object').that.have.property("value");
       expect(parameter).to.be.an('object').that.have.property("units");
     });
+  });
+});
+
+describe('Correct request status', () => {
+  it('request with correct city', () => {
+    const city = "Moscow";
+    getWeather(city)
+        .then(response => {
+          try {
+            expect(response.ok).to.be.true;
+          } catch (error) {
+            console.log("First test 'request with correct city' crashed: ");
+            console.log("Message: " + error.message);
+            console.log("Actual: " + error.actual);
+            console.log("Expected: " + error.expected);
+          }
+        });
+  });
+  it('request with not correct city', () => {
+    const city = "Mosco";
+    getWeather(city)
+        .then(response => {
+          try {
+            expect(response.ok).to.be.false;
+          } catch (error) {
+            console.log("Second test 'request with not correct city' crashed: ");
+            console.log("Message: " + error.message);
+            console.log("Actual: " + error.actual);
+            console.log("Expected: " + error.expected);
+          }
+        });
   });
 });
