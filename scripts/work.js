@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
+const Handlebars = require('handlebars');
 
 export function getWeather(city) {
     const url = "https://api.openweathermap.org/data/2.5/weather?q="
@@ -78,17 +79,17 @@ export function extractErrorMessage(error) {
   return message;
 }
 
-export function displayWeather(forecast) {
-    let source = document.getElementById("weather-template").innerHTML;
+export function displayWeather(source, forecast) {
     let template = Handlebars.compile(source);
     let html = template(forecast);
-    document.getElementById("weather-container").innerHTML = html;
+    console.log(source);
+    return html;
 }
 
 
-export function displayErrorMessage(message) {
-  let source = document.getElementById("message-template").innerHTML;
+export function displayErrorMessage(source, message) {
   let template = Handlebars.compile(source);
   let html = template(message);
-  document.getElementById("message-container").innerHTML = html;
+  console.log(html);
+  return html;
 }

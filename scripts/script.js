@@ -12,14 +12,16 @@ function onSubmit(e) {
         .then(response => {
             response.json()
             .then(json => {
+                let sourceWeather = document.getElementById("weather-template").innerHTML;
+                let sourceError = document.getElementById("message-template").innerHTML;
                 if (response.ok) {
                     const forecast = extractForecast(json);
-                    displayWeather(forecast);
-                    displayErrorMessage(null);
+                    document.getElementById("weather-container").innerHTML = displayWeather(sourceWeather, forecast);
+                    document.getElementById("message-container").innerHTML = displayErrorMessage(sourceErrornull);
                 } else {
                     const error = extractErrorMessage(json.message);
-                    displayErrorMessage(error);
-                    displayWeather(null);
+                    document.getElementById("message-container").innerHTML = displayErrorMessage(sourceError,error);
+                    document.getElementById("weather-container").innerHTML = displayWeather(sourceWeather,null);
                 }
             });
         },

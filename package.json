@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "\"# weather1\"",
   "main": "script.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "build": "webpack -p",
     "watch": "webpack --watch",
@@ -20,9 +17,12 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/register": "^7.6.2",
     "chai": "^4.2.0",
+    "jest": "^24.9.0",
+    "jest-fetch-mock": "^2.1.2",
     "mocha": "^6.2.2",
-    "node-fetch": "^2.6.0",
-    "sinon": "^7.5.0"
+    "sinon": "^7.5.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "repository": {
     "type": "git",

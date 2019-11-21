@@ -1,5 +1,5 @@
 const { expect, assert } = require('chai');
-const { extractForecast, extractErrorMessage, getWeather } = require('../scripts/work');
+const { extractForecast, extractErrorMessage, displayWeather, displayErrorMessage  } = require('../scripts/work');
 
 describe('Getting data from response', () => {
   const response = {
@@ -71,54 +71,88 @@ describe('Getting data from response', () => {
     const real = extractErrorMessage(response);
     expect(real).to.eql(exp);
   });
-
-/*  it("6 elements from response with existing city", function() {
-    const elements = 6;
-    const forecast = extractForecast(response);
-    let len = 0;
-    forecast.parameters.forEach(parameter => {
-      len = len + 1;
-    });
-    expect(len).to.eql(elements);
-  });
-
-  it("elements from response contains 'name', 'value', 'units'", function() {
-    const forecast = extractForecast(response);
-    forecast.parameters.forEach(parameter => {
-      expect(parameter).to.be.an('object').that.have.property("name");
-      expect(parameter).to.be.an('object').that.have.property("value");
-      expect(parameter).to.be.an('object').that.have.property("units");
-    });
-  });*/
 });
 
-describe('Correct request status', () => {
-  it('request with correct city', () => {
-    const city = "Moscow";
-    getWeather(city)
-        .then(response => {
-          try {
-            expect(response.ok).to.be.true;
-          } catch (error) {
-            console.log("First test 'request with correct city' crashed: ");
-            console.log("Message: " + error.message);
-            console.log("Actual: " + error.actual);
-            console.log("Expected: " + error.expected);
-          }
-        });
+describe("Building htmlTree", () => {
+  it("htmlTree for correct city", () => {
+    const forecast  =
+    {
+        cod: 200,
+        city: "Weather in Moscow",
+        description: " is mist",
+        parameters:
+            [
+                {
+                    name: "Temperature",
+                    value: 4.38,
+                    units: "&deg;C",
+                },
+                {
+                    name: "Pressure",
+                    value: 1015,
+                    units: "hPa",
+                },
+                {
+                    name: "Wind speed",
+                    value: 4,
+                    units: "m/s",
+                },
+                {
+                    name: "Humidity",
+                    value: 100,
+                    units: "%",
+                },
+                {
+                    name: "Clouds",
+                    value: 90,
+                    units: "%",
+                },
+                {
+                    name: "Visibility",
+                    value: 3000,
+                    units: "m",
+                },
+
+            ],
+    };
+    const bodyHtml = '<h1>{{city}}{{description}}</h1>'+
+    '<div id="weather-parameters">'+
+    '{{#each parameters}}'+
+        '<div id="parameter">'+
+            '<div class="parameter-type">{{name}}: {{value}} {{{units}}}</div>'+
+        '</div>'+
+    '{{/each}}'+
+    '</div>';
+    let expectedTree =  '<h1>Weather in Moscow is mist</h1>'+
+           '<div id="weather-parameters">'+
+               '<div id="parameter">'+
+                   '<div class="parameter-type">Temperature: 4.38 &deg;C</div>'+
+               '</div>'+
+               '<div id="parameter">'+
+                   '<div class="parameter-type">Pressure: 1015 hPa</div>'+
+               '</div>'+
+               '<div id="parameter">'+
+                   '<div class="parameter-type">Wind speed: 4 m/s</div>'+
+               '</div>'+
+               '<div id="parameter">'+
+                   '<div class="parameter-type">Humidity: 100 %</div>'+
+               '</div>'+
+               '<div id="parameter">'+
+                   '<div class="parameter-type">Clouds: 90 %</div>'+
+               '</div>'+
+               '<div id="parameter">'+
+                   '<div class="parameter-type">Visibility: 3000 m</div>'+
+               '</div>'+
+           '</div>';
+      expect(displayWeather(bodyHtml, forecast)).to.eql(expectedTree);
   });
-  it('request with not correct city', () => {
-    const city = "Mosco";
-    getWeather(city)
-        .then(response => {
-          try {
-            expect(response.ok).to.be.false;
-          } catch (error) {
-            console.log("Second test 'request with not correct city' crashed: ");
-            console.log("Message: " + error.message);
-            console.log("Actual: " + error.actual);
-            console.log("Expected: " + error.expected);
-          }
-        });
+  it("htmlTree for not correct city", () => {
+    const message  =
+    {
+        message: 'city not found',
+    };
+    const bodyHtml = '<h1>{{message}}</h1>';
+    let expectedTree =  '<h1>city not found</h1>';
+      expect(displayErrorMessage(bodyHtml, message)).to.eql(expectedTree);
   });
 });
