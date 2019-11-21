@@ -1,12 +1,4 @@
-//const fetch = require('node-fetch');
 const Handlebars = require('handlebars');
-
-export function getWeather(city) {
-    const url = "https://api.openweathermap.org/data/2.5/weather?q="
-        + city +
-        "&appid=e972dcd233bab1ebce419c370711921f&units=metric&lang=en";
-    return fetch(url);
-}
 
 export function extractForecast(json) {
     const {
@@ -82,7 +74,6 @@ export function extractErrorMessage(error) {
 export function displayWeather(source, forecast) {
     let template = Handlebars.compile(source);
     let html = template(forecast);
-    console.log(source);
     return html;
 }
 
@@ -90,6 +81,5 @@ export function displayWeather(source, forecast) {
 export function displayErrorMessage(source, message) {
   let template = Handlebars.compile(source);
   let html = template(message);
-  console.log(html);
   return html;
 }

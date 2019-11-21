@@ -1,4 +1,4 @@
-import { extractForecast, extractErrorMessage, getWeather, displayWeather, displayErrorMessage } from './work.js';
+import { extractForecast, extractErrorMessage, displayWeather, displayErrorMessage } from './work.js';
 
 window.onload = () => {
     const input = document.getElementById("input-form");
@@ -26,4 +26,11 @@ function onSubmit(e) {
             });
         },
         error => displayErrorMessage(error));
+}
+
+function getWeather(city) {
+    const url = "https://api.openweathermap.org/data/2.5/weather?q="
+        + city +
+        "&appid=e972dcd233bab1ebce419c370711921f&units=metric&lang=en";
+    return fetch(url);
 }
