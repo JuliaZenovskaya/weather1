@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "handlebars": "^4.5.2",
-    "handlebars-loader": "^1.7.1"
+    "handlebars-loader": "^1.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
